@@ -6,6 +6,7 @@ import { ImSwitch } from "react-icons/im";
 import { BsFillInboxFill, BsBook, BsPenFill } from "react-icons/bs";
 import { AnimatePresence, motion } from "framer-motion";
 import Dropdown from "@/Components/Dropdown";
+import FlashMessage from "@/Components/FlashMessage";
 
 export default function AuthenticatedLayout({ user, children }) {
     const { flash } = usePage().props;
@@ -38,7 +39,7 @@ export default function AuthenticatedLayout({ user, children }) {
                                 <Link
                                     className="flex items-center transition-all duration-150 hover:text-red-500"
                                     method="post"
-                                    href="/logout"
+                                    href={route("logout")}
                                     as="button"
                                 >
                                     <ImSwitch className="mr-3" />
@@ -54,7 +55,7 @@ export default function AuthenticatedLayout({ user, children }) {
                     <div className="sticky top-10 space-y-3">
                         <Link
                             className="flex items-center pl-10"
-                            to="/dashboard"
+                            href={route("dashboard")}
                         >
                             <HiChartPie className="mr-3" />
                             Dashboard
@@ -63,7 +64,7 @@ export default function AuthenticatedLayout({ user, children }) {
                         <Dropdown
                             icon={HiUser}
                             menuName="Utenti"
-                            linkList="/users"
+                            linkList="users.index"
                             listName="Lista Utenti"
                             linkNew="/users/new"
                             newName="Crea Nuovo Utente"
@@ -99,8 +100,9 @@ export default function AuthenticatedLayout({ user, children }) {
                 </aside>
                 <main className="col-span-2 p-10 md:col-span-4">
                     {children}
-                    <AnimatePresence>
-                        {flash.message && (
+
+                    <FlashMessage />
+                    {/* {flash.message && (
                             <motion.div
                                 className="fixed right-4 top-4 z-50 rounded-lg bg-emerald-500 p-5 text-white shadow-lg"
                                 initial={{ opacity: 0 }}
@@ -110,8 +112,7 @@ export default function AuthenticatedLayout({ user, children }) {
                             >
                                 <p className="text-lg">{flash.message}</p>
                             </motion.div>
-                        )}
-                    </AnimatePresence>
+                        )} */}
                 </main>
             </div>
         </section>

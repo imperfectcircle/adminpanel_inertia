@@ -32,7 +32,7 @@ export default function Dropdown(props) {
                     >
                         <Link
                             className="flex items-center text-lg text-black transition-all duration-150 hover:text-red-500"
-                            href={props.linkList}
+                            href={route(props.linkList)}
                         >
                             <AiOutlineUnorderedList className="mr-3" />
                             {props.listName}
