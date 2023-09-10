@@ -28,7 +28,7 @@ export default function Login({ status, canResetPassword }) {
 
     return (
         <GuestLayout>
-            <Head title="Log in" />
+            <Head title="Accedi" />
 
             {status && (
                 <div className="mb-4 font-medium text-sm text-green-600">
@@ -38,7 +38,11 @@ export default function Login({ status, canResetPassword }) {
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="name" value="Nome Utente" />
+                    <InputLabel
+                        htmlFor="name"
+                        value="Nome Utente"
+                        className={`${errors.name ? "text-red-500" : ""}`}
+                    />
 
                     <TextInput
                         id="name"
@@ -47,7 +51,7 @@ export default function Login({ status, canResetPassword }) {
                         value={data.name}
                         className={`mt-1 block w-full ${
                             errors.name ? "border-red-500" : ""
-                        } focus:bg-sky-200`}
+                        } focus:bg-emerald-200`}
                         autoComplete="username"
                         isFocused={true}
                         onChange={(e) => setData("name", e.target.value)}
@@ -57,7 +61,11 @@ export default function Login({ status, canResetPassword }) {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
+                    <InputLabel
+                        htmlFor="password"
+                        value="Password"
+                        className={`${errors.name ? "text-red-500" : ""}`}
+                    />
 
                     <TextInput
                         id="password"
@@ -66,7 +74,7 @@ export default function Login({ status, canResetPassword }) {
                         value={data.password}
                         className={`mt-1 block w-full ${
                             errors.name ? "border-red-500" : ""
-                        } focus:bg-sky-200`}
+                        } focus:bg-emerald-200`}
                         autoComplete="current-password"
                         onChange={(e) => setData("password", e.target.value)}
                     />
@@ -99,8 +107,11 @@ export default function Login({ status, canResetPassword }) {
                         </Link>
                     )}
 
-                    <PrimaryButton className="ml-4" disabled={processing}>
-                        Log in
+                    <PrimaryButton
+                        className="ml-4 bg-sky-400 hover:bg-sky-500"
+                        disabled={processing}
+                    >
+                        Accedi
                     </PrimaryButton>
                 </div>
             </form>
