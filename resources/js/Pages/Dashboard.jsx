@@ -1,18 +1,62 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import { Head, Link } from "@inertiajs/react";
 
-export default function Dashboard({ auth }) {
+export default function Dashboard({ auth, statistics, lastOrders }) {
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>}
-        >
+        <AuthenticatedLayout user={auth.user}>
             <Head title="Dashboard" />
 
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900">You're logged in!</div>
+            <div className="grid grid-cols-4 gap-5">
+                <div className="space-y-5 rounded-lg bg-gray-200 p-10 text-center font-bold shadow-md">
+                    <p className="text-xl">Numero Utenti</p>
+                    <Link to="/users" className="text-4xl text-sky-600">
+                        <p className="pt-5">{statistics.countUsers}</p>
+                    </Link>
+                </div>
+                <div className="space-y-5 rounded-lg bg-gray-200 p-10 text-center font-bold shadow-md">
+                    <p className="text-xl">Numero Ordini</p>
+                    <Link to="/orders" className="text-4xl text-sky-600">
+                        <p className="pt-5">{statistics.countOrders}</p>
+                    </Link>
+                </div>
+                <div className="space-y-5 rounded-lg bg-gray-200 p-10 text-center font-bold shadow-md">
+                    <p className="text-xl">Numero Autori</p>
+                    <Link to="/authors" className="text-4xl text-sky-600">
+                        <p className="pt-5">{statistics.countAuthors}</p>
+                    </Link>
+                </div>
+                <div className="space-y-5 rounded-lg bg-gray-200 p-10 text-center font-bold shadow-md">
+                    <p className="text-xl">Numero Manga</p>
+                    <Link to="/comics" className="text-4xl text-sky-600">
+                        <p className="pt-5">{statistics.countComics}</p>
+                    </Link>
+                </div>
+                <div className="col-span-4 rounded-lg bg-gray-200 p-10 text-center shadow-md">
+                    <div className="space-y-5">
+                        <p className="text-xl font-bold ">Ultimi Ordini</p>
+                        {lastOrders.map((order) => (
+                            <div
+                                key={order.id}
+                                className="flex space-x-2 text-xl"
+                            >
+                                <Link
+                                    className="text-sky-600"
+                                    href={`/orders/detail/${order.id}`}
+                                >
+                                    Ordine #{order.id}
+                                </Link>
+                                <p>
+                                    {calculateTimeElapsed(order.created_at) ===
+                                    ""
+                                        ? "Creato ora"
+                                        : `Creato
+                                            ${calculateTimeElapsed(
+                                                order.created_at
+                                            )}
+                                            fa`}
+                                </p>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
