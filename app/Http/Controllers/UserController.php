@@ -24,7 +24,7 @@ class UserController extends Controller
     }
 
     public function create() {
-        return Inertia::render(route('users.create'));
+        return Inertia::render('UserForm');
     }
 
     public function store(StoreUserRequest $request) {
@@ -36,7 +36,7 @@ class UserController extends Controller
     }
 
     public function edit(User $user) {
-        return Inertia::render(route('users.edit', compact('user')));
+        return Inertia::render('UserForm', compact('user'));
     }
 
     public function update(UpdateUserRequest $request, User $user) {
@@ -46,14 +46,15 @@ class UserController extends Controller
         }
         
         $user->update($data);
+        $userName = $user->name;
 
-        return to_route('users.index')->with('message', 'Utente aggiornato con successo.');
+        return to_route('users.index')->with('message', 'L\'Utente ' .$userName. ' è stato aggiornato con successo.');
     }
 
     public function destroy(User $user) {
         $userName = $user->name;
         $user->delete();
 
-        return redirect(route('users.index'), 303)->with('message', 'Utente ' .$userName. ' rimosso con successo.');
+        return redirect(route('users.index'), 303)->with('message', 'L\'Utente ' .$userName. ' è stato rimosso con successo.');
     }
 }

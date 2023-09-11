@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { Link, usePage } from "@inertiajs/react";
+import { Link } from "@inertiajs/react";
 import { useLogoutPopup } from "@/Hooks/useLogoutPopup";
 import { HiUserCircle, HiChartPie, HiUser } from "react-icons/hi";
 import { ImSwitch } from "react-icons/im";
@@ -9,7 +8,6 @@ import Dropdown from "@/Components/Dropdown";
 import FlashMessage from "@/Components/FlashMessage";
 
 export default function AuthenticatedLayout({ user, children }) {
-    const { flash } = usePage().props;
     const [popupIsVisible, togglePopupVisibility] = useLogoutPopup();
 
     return (
@@ -66,34 +64,34 @@ export default function AuthenticatedLayout({ user, children }) {
                             menuName="Utenti"
                             linkList="users.index"
                             listName="Lista Utenti"
-                            linkNew="/users/new"
+                            linkNew="users.create"
                             newName="Crea Nuovo Utente"
                         />
 
                         <Dropdown
                             icon={BsFillInboxFill}
                             menuName="Ordini"
-                            linkList="/orders"
+                            linkList="orders.index"
                             listName="Lista Ordini"
-                            linkNew="/orders/new"
+                            linkNew="orders.create"
                             newName="Crea Nuovo Ordine"
                         />
 
                         <Dropdown
                             icon={BsBook}
                             menuName="Manga"
-                            linkList="/comics"
+                            linkList="comics.index"
                             listName="Lista Manga"
-                            linkNew="/comics/new"
+                            linkNew="comics.create"
                             newName="Aggiungi Manga"
                         />
 
                         <Dropdown
                             icon={BsPenFill}
                             menuName="Autori"
-                            linkList="/authors"
+                            linkList="authors.index"
                             listName="Lista Autori"
-                            linkNew="/authors/new"
+                            linkNew="authors.create"
                             newName="Aggiungi Autore"
                         />
                     </div>
@@ -102,17 +100,6 @@ export default function AuthenticatedLayout({ user, children }) {
                     {children}
 
                     <FlashMessage />
-                    {/* {flash.message && (
-                            <motion.div
-                                className="fixed right-4 top-4 z-50 rounded-lg bg-emerald-500 p-5 text-white shadow-lg"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: 0.5 }}
-                            >
-                                <p className="text-lg">{flash.message}</p>
-                            </motion.div>
-                        )} */}
                 </main>
             </div>
         </section>

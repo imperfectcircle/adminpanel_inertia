@@ -39,7 +39,7 @@ export default function Dropdown(props) {
                         </Link>
                         <Link
                             className="flex items-center text-lg text-black transition-all duration-150 hover:text-red-500"
-                            href={props.linkNew}
+                            href={route(props.linkNew)}
                         >
                             <AiOutlinePlus className="mr-3" />
                             {props.newName}

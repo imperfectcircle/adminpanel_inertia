@@ -41,7 +41,9 @@ export default function Login({ status, canResetPassword }) {
                     <InputLabel
                         htmlFor="name"
                         value="Nome Utente"
-                        className={`${errors.name ? "text-red-500" : ""}`}
+                        className={`text-xl ${
+                            errors.name ? "text-red-500" : ""
+                        }`}
                     />
 
                     <TextInput
@@ -54,6 +56,7 @@ export default function Login({ status, canResetPassword }) {
                         } focus:bg-emerald-200`}
                         autoComplete="username"
                         isFocused={true}
+                        placeholder="Nome Utente"
                         onChange={(e) => setData("name", e.target.value)}
                     />
 
@@ -64,7 +67,9 @@ export default function Login({ status, canResetPassword }) {
                     <InputLabel
                         htmlFor="password"
                         value="Password"
-                        className={`${errors.name ? "text-red-500" : ""}`}
+                        className={`text-xl ${
+                            errors.name ? "text-red-500" : ""
+                        }`}
                     />
 
                     <TextInput
@@ -91,22 +96,11 @@ export default function Login({ status, canResetPassword }) {
                                 setData("remember", e.target.checked)
                             }
                         />
-                        <span className="ml-2 text-sm text-gray-600">
-                            Remember me
-                        </span>
+                        <span className="ml-2 text-gray-600">Ricordami</span>
                     </label>
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
-                    {canResetPassword && (
-                        <Link
-                            href={route("password.request")}
-                            className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        >
-                            Forgot your password?
-                        </Link>
-                    )}
-
                     <PrimaryButton
                         className="ml-4 bg-sky-400 hover:bg-sky-500"
                         disabled={processing}

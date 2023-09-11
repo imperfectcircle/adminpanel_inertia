@@ -28,8 +28,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::controller(UserController::class)->group(function () {
         Route::get('/users', 'index')->name('users.index');
         Route::get('/users/new', 'create')->name('users.create');
-        Route::post('/users/store/{user}', 'store')->name('users.store');
-        Route::get('/users/edit', 'edit')->name('users.edit');
+        Route::post('/users/store', 'store')->name('users.store');
+        Route::get('/users/edit/{user}', 'edit')->name('users.edit');
         Route::put('/users/update/{user}', 'update')->name('users.update');
         Route::delete('/users/delete/{user}', 'destroy')->name('users.delete');
     });

@@ -1,6 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
-import axios from "axios";
 import { useState } from "react";
 
 export default function Users({ auth, users }) {
@@ -21,16 +20,6 @@ export default function Users({ auth, users }) {
             );
         }
     });
-
-    const onDelete = (user) => {
-        if (!window.confirm(`Stai per eliminare l'utente ${user.name}`)) {
-            return;
-        }
-
-        axios.delete(`/users/delete/${user.id}`).then((response) => {
-            console.log(response);
-        });
-    };
 
     return (
         <AuthenticatedLayout user={auth.user}>
@@ -78,7 +67,9 @@ export default function Users({ auth, users }) {
                                             <>
                                                 <Link
                                                     className="rounded-lg bg-emerald-500 px-5 py-2 text-white shadow-lg transition-all duration-150 hover:bg-emerald-600"
-                                                    href={"/users/" + el.id}
+                                                    href={
+                                                        "/users/edit/" + el.id
+                                                    }
                                                 >
                                                     Modifica
                                                 </Link>
@@ -139,7 +130,9 @@ export default function Users({ auth, users }) {
                                             <>
                                                 <Link
                                                     className="rounded-lg bg-emerald-500 px-5 py-2 text-white shadow-lg transition-all duration-150 hover:bg-emerald-600"
-                                                    href={"/users/" + user.id}
+                                                    href={
+                                                        "/users/edit/" + user.id
+                                                    }
                                                 >
                                                     Modifica
                                                 </Link>
