@@ -16,9 +16,13 @@ class OrderController extends Controller
     {
         $orders = Order::query()
             ->orderBy('id', 'desc')
-            ->get();
+            ->get()
+            ->map(function ($order) {
+                $order->formatted_created_at = $order->created_at->format('d-m-Y H:i:s');
+                return $order;
+            });
 
-        return Inertia::render('Orders', compact($orders));
+        return Inertia::render('Orders', compact('orders'));
     }
 
     /**
@@ -26,7 +30,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Orders');
+        return Inertia::render('OrderForm');
     }
 
     /**

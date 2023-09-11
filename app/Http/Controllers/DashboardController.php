@@ -19,7 +19,10 @@ class DashboardController extends Controller
             'countAuthors' => Author::count(),
         ];
 
-        $lastOrders = Order::latest()->take(5)->get();
+        $lastOrders = Order::latest()->take(5)->get()->map(function ($order) {
+                $order->formatted_created_at = $order->created_at->format('Y-m-d H:i:s');
+                return $order;
+            });;
 
         return Inertia::render('Dashboard', compact('statistics', 'lastOrders'));
     }

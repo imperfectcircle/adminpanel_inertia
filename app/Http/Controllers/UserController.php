@@ -15,7 +15,7 @@ class UserController extends Controller
             ->orderBy('id', 'desc')
             ->get()
             ->map(function ($user) {
-            $user->formatted_created_at = $user->created_at->format('Y-m-d H:i:s');
+            $user->formatted_created_at = $user->created_at->format('d-m-Y H:i:s');
             return $user;
         });
             
@@ -30,9 +30,10 @@ class UserController extends Controller
     public function store(StoreUserRequest $request) {
         $data = $request->validated();
         $data['password'] = bcrypt($data['password']);
+        $userName = $request->name;
         User::create($data);
         
-        return to_route('users.index')->with('message', 'Utente creato con successo.');
+        return to_route('users.index')->with('message', 'Utente ' .$userName. ' creato con successo.');
     }
 
     public function edit(User $user) {

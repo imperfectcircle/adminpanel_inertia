@@ -1,4 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import { calculateTimeElapsed } from "@/Utilities/calculateTimeElapsed";
 import { Head, Link } from "@inertiajs/react";
 
 export default function Dashboard({ auth, statistics, lastOrders }) {
@@ -41,17 +42,18 @@ export default function Dashboard({ auth, statistics, lastOrders }) {
                             >
                                 <Link
                                     className="text-sky-600"
-                                    href={`/orders/detail/${order.id}`}
+                                    href={route("orders.show", order)}
                                 >
                                     Ordine #{order.id}
                                 </Link>
                                 <p>
-                                    {calculateTimeElapsed(order.created_at) ===
-                                    ""
+                                    {calculateTimeElapsed(
+                                        order.formatted_created_at
+                                    ) === ""
                                         ? "Creato ora"
                                         : `Creato
                                             ${calculateTimeElapsed(
-                                                order.created_at
+                                                order.formatted_created_at
                                             )}
                                             fa`}
                                 </p>

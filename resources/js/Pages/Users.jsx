@@ -21,6 +21,15 @@ export default function Users({ auth, users }) {
         }
     });
 
+    const confirmationHandler = (username) => {
+        const confirmed = window.confirm(
+            `Stai per eliminare l'utente ${username}. Sei sicuro di voler procedere?`
+        );
+        if (!confirmed) {
+            return false;
+        }
+    };
+
     return (
         <AuthenticatedLayout user={auth.user}>
             <Head title="Lista Utenti | Pannello di Gestione" />
@@ -52,7 +61,7 @@ export default function Users({ auth, users }) {
                             <th>Azioni</th>
                         </tr>
                     </thead>
-                    {inputText && (
+                    {inputText ? (
                         <tbody>
                             {filteredData.map((el) => (
                                 <tr className="text-center" key={el.id}>
@@ -67,10 +76,10 @@ export default function Users({ auth, users }) {
                                             <>
                                                 <Link
                                                     className="rounded-lg bg-emerald-500 px-5 py-2 text-white shadow-lg transition-all duration-150 hover:bg-emerald-600"
-                                                    href={
-                                                        `/users/${el.id}/edit`
-                                                        // "/users/edit/" + el.id
-                                                    }
+                                                    href={route(
+                                                        "users.edit",
+                                                        el
+                                                    )}
                                                 >
                                                     Modifica
                                                 </Link>
@@ -78,7 +87,15 @@ export default function Users({ auth, users }) {
                                                     className="rounded-lg bg-red-500 px-5 py-2 text-white shadow-lg transition-all duration-150 hover:bg-red-600"
                                                     method="delete"
                                                     as="button"
-                                                    href={`/users/${el.id}`}
+                                                    onBefore={() =>
+                                                        confirmationHandler(
+                                                            el.name
+                                                        )
+                                                    }
+                                                    href={route(
+                                                        "users.destroy",
+                                                        el
+                                                    )}
                                                 >
                                                     Elimina
                                                 </Link>
@@ -114,9 +131,7 @@ export default function Users({ auth, users }) {
                                 </tr>
                             )}
                         </tbody>
-                    )}
-
-                    {!inputText && (
+                    ) : (
                         <tbody>
                             {users.map((user) => (
                                 <tr className="text-center" key={user.id}>
@@ -131,10 +146,10 @@ export default function Users({ auth, users }) {
                                             <>
                                                 <Link
                                                     className="rounded-lg bg-emerald-500 px-5 py-2 text-white shadow-lg transition-all duration-150 hover:bg-emerald-600"
-                                                    href={
-                                                        `/users/${user.id}/edit`
-                                                        // "/users/edit/" + user.id
-                                                    }
+                                                    href={route(
+                                                        "users.edit",
+                                                        user
+                                                    )}
                                                 >
                                                     Modifica
                                                 </Link>
@@ -142,7 +157,15 @@ export default function Users({ auth, users }) {
                                                     className="rounded-lg bg-red-500 px-5 py-2 text-white shadow-lg transition-all duration-150 hover:bg-red-600"
                                                     method="delete"
                                                     as="button"
-                                                    href={`/users/${user.id}`}
+                                                    onBefore={() =>
+                                                        confirmationHandler(
+                                                            user.name
+                                                        )
+                                                    }
+                                                    href={route(
+                                                        "users.destroy",
+                                                        user
+                                                    )}
                                                 >
                                                     Elimina
                                                 </Link>
