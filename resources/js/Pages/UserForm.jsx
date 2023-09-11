@@ -34,7 +34,7 @@ export default function UserForm({ auth, user }) {
     const submit = (event) => {
         event.preventDefault();
         if (user) {
-            put(`/users/update/${user.id}`);
+            put(`/users/${user.id}`);
             return;
         }
         post(route("users.store"));

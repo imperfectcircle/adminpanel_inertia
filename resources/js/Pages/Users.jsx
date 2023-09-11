@@ -68,7 +68,8 @@ export default function Users({ auth, users }) {
                                                 <Link
                                                     className="rounded-lg bg-emerald-500 px-5 py-2 text-white shadow-lg transition-all duration-150 hover:bg-emerald-600"
                                                     href={
-                                                        "/users/edit/" + el.id
+                                                        `/users/${el.id}/edit`
+                                                        // "/users/edit/" + el.id
                                                     }
                                                 >
                                                     Modifica
@@ -77,7 +78,7 @@ export default function Users({ auth, users }) {
                                                     className="rounded-lg bg-red-500 px-5 py-2 text-white shadow-lg transition-all duration-150 hover:bg-red-600"
                                                     method="delete"
                                                     as="button"
-                                                    href={`/users/delete/${el.id}`}
+                                                    href={`/users/${el.id}`}
                                                 >
                                                     Elimina
                                                 </Link>
@@ -131,7 +132,8 @@ export default function Users({ auth, users }) {
                                                 <Link
                                                     className="rounded-lg bg-emerald-500 px-5 py-2 text-white shadow-lg transition-all duration-150 hover:bg-emerald-600"
                                                     href={
-                                                        "/users/edit/" + user.id
+                                                        `/users/${user.id}/edit`
+                                                        // "/users/edit/" + user.id
                                                     }
                                                 >
                                                     Modifica
@@ -140,7 +142,7 @@ export default function Users({ auth, users }) {
                                                     className="rounded-lg bg-red-500 px-5 py-2 text-white shadow-lg transition-all duration-150 hover:bg-red-600"
                                                     method="delete"
                                                     as="button"
-                                                    href={`/users/delete/${user.id}`}
+                                                    href={`/users/${user.id}`}
                                                 >
                                                     Elimina
                                                 </Link>
