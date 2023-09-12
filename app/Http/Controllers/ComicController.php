@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Comic;
 use App\Http\Requests\StoreComicRequest;
 use App\Http\Requests\UpdateComicRequest;
+use App\Models\Author;
 use Inertia\Inertia;
 
 class ComicController extends Controller
@@ -25,8 +26,11 @@ class ComicController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        return Inertia::render('ComicForm');
+    {   
+        $authors = Author::query()
+            ->orderBy('id', 'desc')
+            ->get();
+        return Inertia::render('ComicForm', compact('authors'));
     }
 
     /**
@@ -45,7 +49,8 @@ class ComicController extends Controller
      */
     public function show(Comic $comic)
     {
-        return Inertia::render('OrderDetails', compact('comic'));
+        $author = $comic->author;
+        return Inertia::render('ComicDetails', compact('comic', 'author'));
     }
 
     /**
@@ -53,7 +58,11 @@ class ComicController extends Controller
      */
     public function edit(Comic $comic)
     {
-        return Inertia::render('ComicForm', compact('comic'));
+        $authors = Author::query()
+            ->orderBy('id', 'desc')
+            ->get();
+        $selectedAuthor = $comic->author;        
+        return Inertia::render('ComicForm', compact('comic', 'authors', 'selectedAuthor'));
     }
 
     /**

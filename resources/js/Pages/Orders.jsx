@@ -1,14 +1,10 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import { inputHandler } from "@/Utilities/inputHandler";
 import { Head, Link } from "@inertiajs/react";
 import { useState } from "react";
 
 export default function Orders({ auth, orders }) {
     const [inputText, setInputText] = useState("");
-
-    const handleInput = (event) => {
-        const lowerCase = event.target.value.toLowerCase();
-        setInputText(lowerCase);
-    };
 
     const filteredData = orders.filter((order) => {
         if (inputText === "") {
@@ -52,7 +48,7 @@ export default function Orders({ auth, orders }) {
                     name=""
                     id=""
                     placeholder="Cerca per Cliente, Email o Numero Ordine"
-                    onChange={handleInput}
+                    onChange={(event) => inputHandler(event, setInputText)}
                 />
             </div>
 

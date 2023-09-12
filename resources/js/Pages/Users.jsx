@@ -1,14 +1,10 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import { inputHandler } from "@/Utilities/inputHandler";
 import { Head, Link } from "@inertiajs/react";
 import { useState } from "react";
 
 export default function Users({ auth, users }) {
     const [inputText, setInputText] = useState("");
-
-    const handleInput = (event) => {
-        const lowerCase = event.target.value.toLowerCase();
-        setInputText(lowerCase);
-    };
 
     const filteredData = users.filter((user) => {
         if (inputText === "") {
@@ -47,7 +43,7 @@ export default function Users({ auth, users }) {
                     name=""
                     id=""
                     placeholder="Cerca per Nome Utente o Email"
-                    onChange={handleInput}
+                    onChange={(event) => inputHandler(event, setInputText)}
                 />
             </div>
             <div className="mt-5 rounded-lg bg-white p-5 shadow-lg">

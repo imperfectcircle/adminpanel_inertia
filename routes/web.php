@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\ComicController;
 use App\Http\Controllers\DashboardController;
 use Inertia\Inertia;
@@ -30,6 +31,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('users', UserController::class);
     Route::resource('orders', OrderController::class);
     Route::resource('comics', ComicController::class);
+    Route::resource('authors', AuthorController::class);
 });
 
 Route::middleware('auth')->group(function () {

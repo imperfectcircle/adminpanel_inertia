@@ -48,7 +48,7 @@ export default function OrderForm({ auth, order }) {
                 </>
             ) : (
                 <>
-                    <Head title="Crea ordine | Pannello di Gestione" />
+                    <Head title="Crea Ordine | Pannello di Gestione" />
                     <h1 className="text-center mt-5 pb-5 text-4xl font-bold">
                         Nuovo Ordine
                     </h1>
