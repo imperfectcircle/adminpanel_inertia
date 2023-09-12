@@ -21,6 +21,7 @@ export default function Orders({ auth, orders }) {
             return (
                 fullName.includes(inputText) ||
                 fullNameReverse.includes(inputText) ||
+                order.id.toString().includes(inputText) ||
                 order.email.toLowerCase().includes(inputText)
             );
         }
@@ -50,7 +51,7 @@ export default function Orders({ auth, orders }) {
                     type="text"
                     name=""
                     id=""
-                    placeholder="Cerca per Cliente o Email"
+                    placeholder="Cerca per Cliente, Email o Numero Ordine"
                     onChange={handleInput}
                 />
             </div>

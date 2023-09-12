@@ -38,13 +38,13 @@ class UpdateUserRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Il campo nome utente è obbligatorio.',
-            'name.max' => 'Il nome utente può avere una lunghezza massima di 20 caratteri.',
-            'name.unique' => 'Il nome utente inserito esiste già.',
-            'email.required' => 'Il campo email è obbligatorio.',
-            'email.unique' => 'L\'indirizzo email inserito esiste già.',
-            'password.confirmed' => 'Le password non corrispondono',
-            'password.min' => 'La password deve avere almeno 8 caratteri.',
+            'name.required' => 'Il campo Nome Utente è richiesto.',
+            'name.max' => 'Il Nome Utente può avere una lunghezza massima di 20 caratteri.',
+            'name.unique' => 'Il Nome Utente inserito esiste già.',
+            'email.required' => 'Il campo Email è richiesto.',
+            'email.unique' => 'L\'Indirizzo Email inserito esiste già.',
+            'password.confirmed' => 'Le Password non corrispondono',
+            'password.min' => 'La Password deve contenere almeno 8 caratteri.',
         ];
     }
 }

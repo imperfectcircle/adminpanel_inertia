@@ -38,14 +38,14 @@ class StoreUserRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Il campo nome utente è obbligatorio.',
-            'name.max' => 'Il nome utente può avere una lunghezza massima di 20 caratteri.',
-            'name.unique' => 'Il nome utente inserito esiste già.',
-            'email.required' => 'Il campo email è obbligatorio.',
+            'name.required' => 'Il campo Nome Utente è richiesto.',
+            'name.max' => 'Il Nome Utente può avere una lunghezza massima di 20 caratteri.',
+            'name.unique' => 'Il Nome Utente inserito esiste già.',
+            'email.required' => 'Il campo Email è richiesto.',
             'email.unique' => 'L\'indirizzo email inserito esiste già.',
-            'password.required' => 'Il campo password è obbligatorio.',
-            'password.confirmed' => 'Le password non corrispondono',
-            'password.min' => 'La password deve avere almeno 8 caratteri.',
+            'password.required' => 'Il campo Password è richiesto.',
+            'password.confirmed' => 'Le Password non corrispondono',
+            'password.min' => 'La Password deve contenere almeno 8 caratteri.',
         ];
     }
 }

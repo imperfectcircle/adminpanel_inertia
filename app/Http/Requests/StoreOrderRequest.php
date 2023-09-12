@@ -34,17 +34,17 @@ class StoreOrderRequest extends FormRequest
     public function messages()
     {
         return [
-            'first_name.required' => 'Il campo nome è obbligatorio.',
-            'first_name.string' => 'Il campo nome deve essere di tipo testo.',
-            'first_name.min' => 'Il campo nome deve contenere almeno 3 caratteri.',
-            'last_name.required' => 'Il campo cognome è obbligatorio.',
-            'last_name.string' => 'Il campo cognome deve essere di tipo testo.',
-            'last_name.min' => 'Il campo cognome deve contenere almeno 3 caratteri.',
-            'order_items.requires' => 'Il campo Ordine è obbligatorio',
-            'email.required' => 'Il campo email è obbligatorio.',
+            'first_name.required' => 'Il campo Nome Cliente è richiesto.',
+            'first_name.string' => 'Il campo Nome Cliente deve essere di tipo testo.',
+            'first_name.min' => 'Il campo Nome Cliente deve contenere almeno 3 caratteri.',
+            'last_name.required' => 'Il campo Cognome Cliente è richiesto.',
+            'last_name.string' => 'Il campo Cognome Cliente deve essere di tipo testo.',
+            'last_name.min' => 'Il campo Cognome Cliente deve contenere almeno 3 caratteri.',
+            'order_items.required' => 'Il campo Ordine è richiesto',
+            'email.required' => 'Il campo Email di Contatto è richiesto.',
             'email.email' => 'Inserisci un indirizzo email valido.',
-            'amount.required' => 'Il campo totale è obbligatorio.',
-            'state.required' => 'Il campo stato è obbligatorio.'
+            'amount.required' => 'Il campo Totale è richiesto.',
+            'state.required' => 'Il campo Stato è richiesto.'
         ];
     }
 }

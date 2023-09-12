@@ -129,7 +129,7 @@ export default function OrderForm({ auth, order }) {
                         rows="10"
                         className={`w-full text-xl mt-1 block resize-none rounded-md shadow-lg ${
                             errors.order_items ? "border-red-500" : ""
-                        } focus:bg-emerald-200}`}
+                        } focus:bg-emerald-200`}
                         name="order_items"
                         id="order_items"
                         value={data.order_items}
@@ -139,6 +139,11 @@ export default function OrderForm({ auth, order }) {
                     >
                         {data.order_items}
                     </textarea>
+
+                    <InputError
+                        className="text-xl mt-2"
+                        message={errors.order_items}
+                    />
                 </div>
 
                 <div className="mt-4">
@@ -155,9 +160,9 @@ export default function OrderForm({ auth, order }) {
                         name="email"
                         type="email"
                         value={data.email}
-                        className={`mt-1 block w-full ${
+                        className={`mt-1 block w-full focus:bg-emerald-200 ${
                             errors.email ? "border-red-500" : ""
-                        } focus:bg-emerald-200`}
+                        }`}
                         autoComplete="off"
                         onChange={(event) =>
                             setData("email", event.target.value)
@@ -200,41 +205,66 @@ export default function OrderForm({ auth, order }) {
                     />
                 </div>
 
-                <div className="mt-4 flex items-center space-x-2">
-                    <input
-                        type="radio"
-                        name="state"
-                        id="pagato"
-                        value="pagato"
-                        className={`${errors.state ? "border-red-500" : ""}`}
-                        checked={data.state === "pagato" ? "checked" : null}
-                        onChange={(ev) => setData("state", ev.target.value)}
+                <div className="mt-4 space-x-2">
+                    <div className="flex space-x-5">
+                        <div className="flex items-center space-x-2">
+                            <input
+                                type="radio"
+                                name="state"
+                                id="pagato"
+                                value="pagato"
+                                className={`${
+                                    errors.state ? "border-red-500" : ""
+                                }`}
+                                checked={
+                                    data.state === "pagato" ? "checked" : null
+                                }
+                                onChange={(ev) =>
+                                    setData("state", ev.target.value)
+                                }
+                            />
+                            <label
+                                className={`text-xl ${
+                                    errors.state ? "text-red-500" : ""
+                                }`}
+                                htmlFor="pagato"
+                            >
+                                Pagato
+                            </label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                            <input
+                                type="radio"
+                                name="state"
+                                id="non pagato"
+                                value="non pagato"
+                                className={`${
+                                    errors.state ? "border-red-500" : ""
+                                }`}
+                                checked={
+                                    data.state === "non pagato"
+                                        ? "checked"
+                                        : null
+                                }
+                                onChange={(ev) =>
+                                    setData("state", ev.target.value)
+                                }
+                            />
+                            <label
+                                className={`text-xl ${
+                                    errors.state ? "text-red-500" : ""
+                                }`}
+                                htmlFor="non pagato"
+                            >
+                                Non Pagato
+                            </label>
+                        </div>
+                    </div>
+
+                    <InputError
+                        className="text-xl mt-2"
+                        message={errors.state}
                     />
-                    <label
-                        className={`text-xl ${
-                            errors.amount ? "text-red-500" : ""
-                        }`}
-                        htmlFor="pagato"
-                    >
-                        Pagato
-                    </label>
-                    <input
-                        type="radio"
-                        name="state"
-                        id="non pagato"
-                        value="non pagato"
-                        className={`${errors.state ? "border-red-500" : ""}`}
-                        checked={data.state === "non pagato" ? "checked" : null}
-                        onChange={(ev) => setData("state", ev.target.value)}
-                    />
-                    <label
-                        className={`text-xl ${
-                            errors.amount ? "text-red-500" : ""
-                        }`}
-                        htmlFor="non pagato"
-                    >
-                        Non Pagato
-                    </label>
                 </div>
 
                 <div className="mt-4 text-center">
