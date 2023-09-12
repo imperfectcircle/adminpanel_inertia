@@ -10,25 +10,37 @@ export default function Dashboard({ auth, statistics, lastOrders }) {
             <div className="grid grid-cols-4 gap-5">
                 <div className="space-y-5 rounded-lg bg-gray-200 p-10 text-center font-bold shadow-md">
                     <p className="text-xl">Numero Utenti</p>
-                    <Link to="/users" className="text-4xl text-sky-600">
+                    <Link
+                        href={route("users.index")}
+                        className="text-4xl text-sky-600"
+                    >
                         <p className="pt-5">{statistics.countUsers}</p>
                     </Link>
                 </div>
                 <div className="space-y-5 rounded-lg bg-gray-200 p-10 text-center font-bold shadow-md">
                     <p className="text-xl">Numero Ordini</p>
-                    <Link to="/orders" className="text-4xl text-sky-600">
+                    <Link
+                        href={route("orders.index")}
+                        className="text-4xl text-sky-600"
+                    >
                         <p className="pt-5">{statistics.countOrders}</p>
                     </Link>
                 </div>
                 <div className="space-y-5 rounded-lg bg-gray-200 p-10 text-center font-bold shadow-md">
                     <p className="text-xl">Numero Autori</p>
-                    <Link to="/authors" className="text-4xl text-sky-600">
+                    <Link
+                        href={route("authors.index")}
+                        className="text-4xl text-sky-600"
+                    >
                         <p className="pt-5">{statistics.countAuthors}</p>
                     </Link>
                 </div>
                 <div className="space-y-5 rounded-lg bg-gray-200 p-10 text-center font-bold shadow-md">
                     <p className="text-xl">Numero Manga</p>
-                    <Link to="/comics" className="text-4xl text-sky-600">
+                    <Link
+                        href={route("comics.index")}
+                        className="text-4xl text-sky-600"
+                    >
                         <p className="pt-5">{statistics.countComics}</p>
                     </Link>
                 </div>

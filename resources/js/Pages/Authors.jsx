@@ -1,30 +1,30 @@
 import { useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { inputHandler } from "@/Utilities/inputHandler";
 import { Head, Link } from "@inertiajs/react";
+import { inputHandler } from "@/Utilities/inputHandler";
+import ComicsDropdown from "@/Components/ComicsDropdown";
 
-export default function Comics({ auth, comics }) {
+export default function Authors({ auth, authors }) {
     const [inputText, setInputText] = useState("");
 
-    const filteredData = comics.filter((comic) => {
+    const filteredData = authors.filter((author) => {
         if (inputText === "") {
-            return comic;
+            return author;
         } else {
             const fullName =
-                `${comic.author.first_name} ${comic.author.last_name}`.toLowerCase();
+                `${author.first_name} ${author.last_name}`.toLowerCase();
             const fullNameReverse =
-                `${comic.author.last_name} ${comic.author.first_name}`.toLowerCase();
+                `${author.last_name} ${author.first_name}`.toLowerCase();
             return (
-                comic.title.toLowerCase().includes(inputText) ||
                 fullName.includes(inputText) ||
                 fullNameReverse.includes(inputText)
             );
         }
     });
 
-    const confirmationHandler = (title) => {
+    const confirmationHandler = (firstName, lastName) => {
         const confirmed = window.confirm(
-            `Stai per eliminare il manga ${title}. Sei sicuro di voler procedere?`
+            `Stai per eliminare l'autore ${firstName} ${lastName}. Verranno eliminati anche i manga ad esso collegato. Sei sicuro di voler procedere?`
         );
         if (!confirmed) {
             return false;
@@ -33,9 +33,9 @@ export default function Comics({ auth, comics }) {
 
     return (
         <AuthenticatedLayout user={auth.user}>
-            <Head title="Lista Manga | Pannello di Gestione" />
+            <Head title="Lista Autori | Pannello di Gestione" />
             <div className="text-center">
-                <h1 className="text-4xl font-bold">Manga</h1>
+                <h1 className="text-4xl font-bold">Autori</h1>
             </div>
             <div className="my-5 text-center">
                 <input
@@ -47,7 +47,7 @@ export default function Comics({ auth, comics }) {
                     type="text"
                     name=""
                     id=""
-                    placeholder="Cerca per Titolo o Autore"
+                    placeholder="Cerca per Autore"
                     onChange={(event) => inputHandler(event, setInputText)}
                 />
             </div>
@@ -57,10 +57,9 @@ export default function Comics({ auth, comics }) {
                     <thead className="bg-gray-200">
                         <tr className="text-center">
                             <th>ID</th>
-                            <th>Titolo</th>
-                            <th>Autore</th>
-                            <th>Anno</th>
-                            <th>Prezzo €</th>
+                            <th>Nome</th>
+                            <th>Cognome</th>
+                            <th>Manga a Catalogo</th>
                             <th>Azioni</th>
                         </tr>
                     </thead>
@@ -68,33 +67,33 @@ export default function Comics({ auth, comics }) {
                         <tbody>
                             {filteredData.map((el) => (
                                 <tr className="text-center" key={el.id}>
-                                    <td>{el.id}</td>
-                                    <td className="first-letter:uppercase">
+                                    <td>
                                         <Link
                                             className="text-sky-600"
-                                            href={route("comics.show", el)}
+                                            href={route("authors.show", el)}
                                         >
-                                            {el.title}
+                                            {el.id}
                                         </Link>
                                     </td>
                                     <td className="first-letter:uppercase">
-                                        <Link
-                                            className="text-sky-600"
-                                            href={route(
-                                                "authors.show",
-                                                el.author.id
-                                            )}
-                                        >
-                                            {`${el.author.first_name} ${el.author.last_name}`}
-                                        </Link>
+                                        {el.first_name}
                                     </td>
-                                    <td>{el.year}</td>
-                                    <td>{el.price}</td>
+                                    <td className="first-letter:uppercase">
+                                        {el.last_name}
+                                    </td>
+                                    <td>
+                                        <div className="flex items-center justify-center">
+                                            <ComicsDropdown
+                                                text="Manga"
+                                                author={el.comics}
+                                            />
+                                        </div>
+                                    </td>
 
                                     <td className="space-x-3 px-6 py-3">
                                         <Link
                                             className="rounded-lg bg-emerald-500 px-5 py-2 text-white shadow-lg transition-all duration-150 hover:bg-emerald-600"
-                                            href={route("comics.edit", el)}
+                                            href={route("authors.edit", el)}
                                         >
                                             Modifica
                                         </Link>
@@ -103,9 +102,12 @@ export default function Comics({ auth, comics }) {
                                             method="delete"
                                             as="button"
                                             onBefore={() =>
-                                                confirmationHandler(el.title)
+                                                confirmationHandler(
+                                                    el.first_name,
+                                                    el.last_name
+                                                )
                                             }
-                                            href={route("comics.destroy", el)}
+                                            href={route("authors.destroy", el)}
                                         >
                                             Elimina
                                         </Link>
@@ -116,7 +118,7 @@ export default function Comics({ auth, comics }) {
                                 <tr>
                                     <td colSpan="5" className="text-center">
                                         <p className="text-lg">
-                                            Manga non trovato
+                                            Autore non trovato
                                         </p>
                                     </td>
                                 </tr>
@@ -124,35 +126,34 @@ export default function Comics({ auth, comics }) {
                         </tbody>
                     ) : (
                         <tbody>
-                            {comics.map((comic) => (
-                                <tr className="text-center" key={comic.id}>
-                                    <td>{comic.id}</td>
+                            {authors.map((author) => (
+                                <tr className="text-center" key={author.id}>
                                     <td>
                                         <Link
-                                            className="text-sky-600 "
-                                            href={route("comics.show", comic)}
+                                            className="text-sky-600"
+                                            to={`/authors/detail/${author.id}`}
                                         >
-                                            {comic.title}
+                                            {author.id}
                                         </Link>
                                     </td>
                                     <td className="first-letter:uppercase">
-                                        <Link
-                                            className="text-sky-600 "
-                                            href={route(
-                                                "authors.show",
-                                                comic.author.id
-                                            )}
-                                        >
-                                            {`${comic.author.first_name} ${comic.author.last_name}`}
-                                        </Link>
+                                        {author.first_name}
                                     </td>
-                                    <td>{comic.year}</td>
-                                    <td>{comic.price}</td>
-
+                                    <td className="first-letter:uppercase">
+                                        {author.last_name}
+                                    </td>
+                                    <td>
+                                        <div className="flex items-center justify-center">
+                                            <ComicsDropdown
+                                                text="Manga"
+                                                author={author.comics}
+                                            />
+                                        </div>
+                                    </td>
                                     <td className="space-x-3 px-6 py-3">
                                         <Link
                                             className="rounded-lg bg-emerald-500 px-5 py-2 text-white shadow-lg transition-all duration-150 hover:bg-emerald-600"
-                                            href={route("comics.edit", comic)}
+                                            href={route("authors.edit", author)}
                                         >
                                             Modifica
                                         </Link>
@@ -161,11 +162,14 @@ export default function Comics({ auth, comics }) {
                                             method="delete"
                                             as="button"
                                             onBefore={() =>
-                                                confirmationHandler(comic.title)
+                                                confirmationHandler(
+                                                    author.first_name,
+                                                    author.last_name
+                                                )
                                             }
                                             href={route(
-                                                "comics.destroy",
-                                                comic
+                                                "authors.destroy",
+                                                author
                                             )}
                                         >
                                             Elimina

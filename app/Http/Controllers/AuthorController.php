@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Author;
 use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\UpdateAuthorRequest;
+use Inertia\Inertia;
 
 class AuthorController extends Controller
 {
@@ -13,7 +14,11 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        //
+        $authors = Author::with('comics')
+            ->orderBy('id', 'desc')
+            ->get();
+
+            return Inertia::render('Authors', compact('authors'));
     }
 
     /**
@@ -21,7 +26,7 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('AuthorForm');
     }
 
     /**
@@ -29,7 +34,10 @@ class AuthorController extends Controller
      */
     public function store(StoreAuthorRequest $request)
     {
-        //
+        $data = $request->validated();
+        Author::crate($data);
+
+        return to_route('authors.index')->with('message', 'Autore creato con successo');
     }
 
     /**
@@ -37,7 +45,7 @@ class AuthorController extends Controller
      */
     public function show(Author $author)
     {
-        //
+        return Inertia::render('AuthorDetails', compact('author'));
     }
 
     /**
@@ -45,7 +53,7 @@ class AuthorController extends Controller
      */
     public function edit(Author $author)
     {
-        //
+        return Inertia::render('AuthorForm', compact('author'));
     }
 
     /**
@@ -53,7 +61,12 @@ class AuthorController extends Controller
      */
     public function update(UpdateAuthorRequest $request, Author $author)
     {
-        //
+        $data = $request->validated();
+        $author->update($data);
+        $authorName = $author->first_name;
+        $authorLastName = $author->last_name;
+
+        return to_route('authors.index')->with('message', 'L\'autore ' .$authorName. ' ' .$authorLastName. ' è stato aggiornato con successo.');
     }
 
     /**
@@ -61,6 +74,11 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
-        //
+        $authorName = $author->first_name;
+        $authorLastName = $author->last_name;
+        $author->comics()->delete();
+        $author->delete();
+
+        return redirect(route('authors.index'), 303)->with('message', 'L\'autore ' .$authorName. ' ' .$authorLastName. ' è stato rimosso con successo.');
     }
 }
