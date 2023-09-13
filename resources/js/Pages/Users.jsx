@@ -68,7 +68,10 @@ export default function Users({ auth, users }) {
                                     <td>{el.email}</td>
                                     <td>{el.formatted_created_at}</td>
                                     <td className="space-x-3 px-6 py-3">
-                                        {!(el.name === "demo") && (
+                                        {!(
+                                            el.name === "demo" ||
+                                            el.name === auth.user.name
+                                        ) ? (
                                             <>
                                                 <Link
                                                     className="rounded-lg bg-emerald-500 px-5 py-2 text-white shadow-lg transition-all duration-150 hover:bg-emerald-600"
@@ -96,8 +99,7 @@ export default function Users({ auth, users }) {
                                                     Elimina
                                                 </Link>
                                             </>
-                                        )}
-                                        {el.name === "demo" && (
+                                        ) : (
                                             <>
                                                 <Link
                                                     className="opacity-50 cursor-not-allowed rounded-lg bg-emerald-500 px-5 py-2 text-white shadow-lg"
@@ -138,7 +140,10 @@ export default function Users({ auth, users }) {
                                     <td>{user.email}</td>
                                     <td>{user.formatted_created_at}</td>
                                     <td className="space-x-3 px-6 py-3">
-                                        {!(user.name === "demo") && (
+                                        {!(
+                                            user.name === "demo" ||
+                                            user.name === auth.user.name
+                                        ) ? (
                                             <>
                                                 <Link
                                                     className="rounded-lg bg-emerald-500 px-5 py-2 text-white shadow-lg transition-all duration-150 hover:bg-emerald-600"
@@ -166,8 +171,7 @@ export default function Users({ auth, users }) {
                                                     Elimina
                                                 </Link>
                                             </>
-                                        )}
-                                        {user.name === "demo" && (
+                                        ) : (
                                             <>
                                                 <Link
                                                     className="opacity-50 cursor-not-allowed rounded-lg bg-emerald-500 px-5 py-2 text-white shadow-lg"
