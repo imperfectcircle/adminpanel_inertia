@@ -35,7 +35,7 @@ class AuthorController extends Controller
     public function store(StoreAuthorRequest $request)
     {
         $data = $request->validated();
-        Author::crate($data);
+        Author::create($data);
 
         return to_route('authors.index')->with('message', 'Autore creato con successo');
     }
@@ -45,7 +45,8 @@ class AuthorController extends Controller
      */
     public function show(Author $author)
     {
-        return Inertia::render('AuthorDetails', compact('author'));
+        $comics = $author->comics;
+        return Inertia::render('AuthorDetails', compact('author', 'comics'));
     }
 
     /**

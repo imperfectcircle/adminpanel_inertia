@@ -91,7 +91,7 @@ export default function Orders({ auth, orders }) {
                                     <td>{el.formatted_created_at}</td>
                                     <td>
                                         <Link
-                                            className="text-sky-600"
+                                            className="text-sky-600 underline"
                                             href={route("orders.show", el)}
                                         >
                                             {el.id}
@@ -158,7 +158,7 @@ export default function Orders({ auth, orders }) {
                                     <td>{order.formatted_created_at}</td>
                                     <td>
                                         <Link
-                                            className="text-sky-600"
+                                            className="text-sky-600 underline"
                                             href={route("orders.show", order)}
                                         >
                                             {order.id}

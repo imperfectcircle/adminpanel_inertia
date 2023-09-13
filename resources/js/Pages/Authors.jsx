@@ -24,7 +24,7 @@ export default function Authors({ auth, authors }) {
 
     const confirmationHandler = (firstName, lastName) => {
         const confirmed = window.confirm(
-            `Stai per eliminare l'autore ${firstName} ${lastName}. Verranno eliminati anche i manga ad esso collegato. Sei sicuro di voler procedere?`
+            `Stai per eliminare l'autore ${firstName} ${lastName}. Verranno rimossi anche i manga ad esso collegati. Sei sicuro di voler procedere?`
         );
         if (!confirmed) {
             return false;
@@ -69,7 +69,7 @@ export default function Authors({ auth, authors }) {
                                 <tr className="text-center" key={el.id}>
                                     <td>
                                         <Link
-                                            className="text-sky-600"
+                                            className="underline text-sky-600"
                                             href={route("authors.show", el)}
                                         >
                                             {el.id}
@@ -130,8 +130,8 @@ export default function Authors({ auth, authors }) {
                                 <tr className="text-center" key={author.id}>
                                     <td>
                                         <Link
-                                            className="text-sky-600"
-                                            to={`/authors/detail/${author.id}`}
+                                            className=" underline text-sky-600"
+                                            href={route("authors.show", author)}
                                         >
                                             {author.id}
                                         </Link>
