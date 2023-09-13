@@ -49,7 +49,7 @@ export default function AuthenticatedLayout({ user, children }) {
                 </div>
             </header>
             <div className="grid h-screen w-full grid-cols-3 pt-[60px] md:grid-cols-5 ">
-                <aside className="min-w-fit bg-sky-400 pt-16 text-xl  text-white shadow-lg shadow-black">
+                <aside className="min-w-fit bg-sky-400 pt-16 text-xl text-white shadow-lg shadow-black">
                     <div className="sticky top-32 space-y-3">
                         <Link
                             className="flex items-center pl-10"
