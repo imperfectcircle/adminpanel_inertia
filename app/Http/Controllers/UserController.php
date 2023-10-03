@@ -37,6 +37,10 @@ class UserController extends Controller
     }
 
     public function edit(User $user) {
+        if ($user->id === 1) {
+            return to_route('users.index');
+        }
+        
         return Inertia::render('UserForm', compact('user'));
     }
 
